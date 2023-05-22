@@ -22,14 +22,14 @@ export default function Pokedex({ pokemonList }) {
                 alt={pokemon.name}
               />
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h5" component="div" className='text-center capitalize'>
                   {pokemon.name}
                 </Typography>
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <Button size="small" color="primary" href={pokemon.name}>
-                Share
+              <Button size="small" className='text-black' href={pokemon.name}>
+                detail
               </Button>
             </CardActions>
           </Card>

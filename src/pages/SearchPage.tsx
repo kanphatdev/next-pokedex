@@ -4,7 +4,7 @@ import { Container, TextField, Grid, Card, CardContent, Typography, CardMedia } 
 export default function SearchPage({ pokemons }) {
   const [searchTerm, setSearchTerm] = useState('');
   const filteredPokemons = pokemons.filter(pokemon =>
-    pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+    pokemon.name.toUpperCase().includes(searchTerm.toLowerCase())
   );
 
   const handleSearchChange = event => {
