@@ -4,6 +4,7 @@ export interface PokemonPage{
     previous: string | null,
 }
 export interface Pokemon{
+    id: number;
     name:string,
     types:{
         type:{
@@ -19,4 +20,5 @@ sprites:{
         }
     }
 }
+abilities: string[];
 }

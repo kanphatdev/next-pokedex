@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Container, TextField, Grid, Card, CardContent, Typography, CardMedia } from '@mui/material';
+import { Container, TextField, Grid, Card, CardContent, Typography, CardMedia,Button } from '@mui/material';
 
 export default function SearchPage({ pokemons }) {
   const [searchTerm, setSearchTerm] = useState('');
   const filteredPokemons = pokemons.filter(pokemon =>
-    pokemon.name.toUpperCase().includes(searchTerm.toLowerCase())
+    pokemon.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    pokemon.id.toString().includes(searchTerm)
   );
 
   const handleSearchChange = event => {
@@ -24,7 +25,7 @@ export default function SearchPage({ pokemons }) {
       <Grid container spacing={2}>
         {filteredPokemons.map(pokemon => (
           <Grid item key={pokemon.name} xs={12} sm={6} md={4} lg={3}>
-            <Card>
+            <Card className="bg-white">
               <CardMedia
                 component="img"
                 height="140"
@@ -32,18 +33,15 @@ export default function SearchPage({ pokemons }) {
                 alt={pokemon.name}
               />
               <CardContent>
-                <Typography variant="h5" component="div" className='capitalize text-center'>
+                <Typography variant="h5" component="div" className="capitalize">
                   {pokemon.name}
                 </Typography>
-                <Typography color="text.secondary" >
+                <Typography color="text.secondary">
                   ID: {pokemon.id}
                 </Typography>
-                <Typography color="text.secondary">
-                  Height: {pokemon.height}
-                </Typography>
-                <Typography color="text.secondary">
-                  Weight: {pokemon.weight}
-                </Typography>
+                <Button size="small" className='text-black' href={pokemon.name}>
+                detail
+              </Button>
               </CardContent>
             </Card>
           </Grid>

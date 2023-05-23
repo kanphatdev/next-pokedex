@@ -25,28 +25,23 @@ export default function PokemonDetailsPage() {
                 {pokemon === null && <p>Pokemon not found</p>}
                 {pokemon &&
                     <>
-                        <Card sx={{ maxWidth: 345 }} className="centered-element">
+                        <Card sx={{ maxWidth: 500 }}>
                             <CardActionArea>
                                 <CardMedia
                                     component="img"
                                     height="140"
                                     image={pokemon.sprites.other["official-artwork"].front_default}
-                                    alt={pokemon.name}
+                                    alt="green iguana"
                                 />
                                 <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div" className="capitalize text-center">
-                                        {pokemon.name}
+                                    <Typography gutterBottom variant="h5" component="div" className="xap">
+                                    {pokemon.name}
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
-                                        <p className="capitalize">weight:{pokemon.weight / 10}</p>
-                                        <p className="capitalize">height:{pokemon.height * 10}</p>
-                                        <p className="capitalize">element: {pokemon.types.map(type => type.type.name).join(", ")}</p>
+                                        Lizards are a widespread group of squamate reptiles, with over 6,000
+                                        species, ranging across all continents except Antarctica
                                     </Typography>
-                                    <Button size="small" color="primary" className='text-black' href='/'>
-                                        back
-                                    </Button>
                                 </CardContent>
-
                             </CardActionArea>
                         </Card>
 
