@@ -25,7 +25,7 @@ export default function PokemonDetailsPage() {
                 {pokemon === null && <p>Pokemon not found</p>}
                 {pokemon &&
                     <>
-                        <Card sx={{ maxWidth: 500 }}>
+                        <Card sx={{ maxWidth: 500 }} className="centered-element">
                             <CardActionArea>
                                 <CardMedia
                                     component="img"
@@ -34,12 +34,17 @@ export default function PokemonDetailsPage() {
                                     alt="green iguana"
                                 />
                                 <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div" className="xap">
-                                    {pokemon.name}
+                                    <Typography gutterBottom variant="h5" component="div" className="xap text-center capitalize" >
+                                        {pokemon.name}
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
-                                        Lizards are a widespread group of squamate reptiles, with over 6,000
-                                        species, ranging across all continents except Antarctica
+                                        <p className="uppercase mt-0 ">
+                                            id: {pokemon.id} 
+                                        <br className="py-5" /> Weight: {pokemon.weight / 10} <br className="py-5" /> height:{pokemon.height * 10} 
+                                        <br /> element:{pokemon.types.map(type => type.type.name).join(", ")}
+
+                                        </p>
+
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>

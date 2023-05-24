@@ -1,19 +1,37 @@
 import { useState } from 'react';
 import { Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, Button } from '@mui/material';
+import Link from 'next/link';
+interface Pokemon {
+  name: string;
+  sprites: {
+    other: {
+      'official-artwork': {
+        front_default: string;
+      };
+    };
+  };
+}
 
-export default function Pokedex({ pokemonList }) {
-  const [selectedPokemon, setSelectedPokemon] = useState(null);
+interface PokedexProps {
+  pokemonList: Pokemon[];
+}
 
-  const handlePokemonClick = (pokemon) => {
+export default function Pokedex({ pokemonList }: PokedexProps) {
+  const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
+
+  const handlePokemonClick = (pokemon: Pokemon) => {
     setSelectedPokemon(pokemon);
   };
 
   return (
-    <div>
-      <h1>Pokedex</h1>
-      <div className="pokemon-list">
+    <div className="p-4">
+   
+      <Link className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full no-underline"  href='SearchPage'>
+        Button
+      </Link>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 my-3">
         {pokemonList.map((pokemon) => (
-          <Card key={pokemon.name} sx={{ maxWidth: 345 }} onClick={() => handlePokemonClick(pokemon)}>
+          <Card key={pokemon.name} className="max-w-md " onClick={() => handlePokemonClick(pokemon)}>
             <CardActionArea>
               <CardMedia
                 component="img"
@@ -22,22 +40,22 @@ export default function Pokedex({ pokemonList }) {
                 alt={pokemon.name}
               />
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div" className='text-center capitalize'>
+                <Typography gutterBottom variant="h5" component="div" className="text-center capitalize">
                   {pokemon.name}
                 </Typography>
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <Button size="small" className='text-black' href={pokemon.name}>
-                detail
+              <Button size="small" className="text-black" href={pokemon.name}>
+                Detail
               </Button>
             </CardActions>
           </Card>
         ))}
       </div>
       {selectedPokemon && (
-        <div className="pokemon-details">
-          <h2>{selectedPokemon.name}</h2>
+        <div className="mt-8">
+          <h2 className="text-xl font-bold">{selectedPokemon.name}</h2>
           <img src={selectedPokemon.sprites.other['official-artwork'].front_default} alt={selectedPokemon.name} />
         </div>
       )}
@@ -49,8 +67,8 @@ export async function getStaticProps() {
   const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100');
   const data = await res.json();
 
-  const pokemonList = await Promise.all(
-    data.results.map(async (pokemon) => {
+  const pokemonList: Pokemon[] = await Promise.all(
+    data.results.map(async (pokemon: { url: string }) => {
       const pokemonRes = await fetch(pokemon.url);
       const pokemonData = await pokemonRes.json();
       return pokemonData;
