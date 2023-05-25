@@ -7,7 +7,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import usePokemon from "@/hook/usePokemon";
-import { Button } from "@mui/material";
+import Link from "next/link";
 export default function PokemonDetailsPage() {
     const router = useRouter();
     const pokemonName = router.query.pokemon?.toString() || "";
@@ -37,14 +37,11 @@ export default function PokemonDetailsPage() {
                                     <Typography gutterBottom variant="h5" component="div" className="xap text-center capitalize" >
                                         {pokemon.name}
                                     </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        <p className="uppercase mt-0 ">
-                                            id: {pokemon.id} 
-                                        <br className="py-5" /> Weight: {pokemon.weight / 10} <br className="py-5" /> height:{pokemon.height * 10} 
-                                        <br /> element:{pokemon.types.map(type => type.type.name).join(", ")}
-
-                                        </p>
-
+                                    <Typography variant="body2" color="text.secondary" className="text-center capitalize">
+                                        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">W#{pokemon.weight / 10}</span>
+                                        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">H#{pokemon.height * 10}</span>
+                                        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">ET#{pokemon.types.map(type => type.type.name).join(", ")}</span>
+                                        <Link className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 no-underline hover:bg-black text-white" href='/'><i className="ri-arrow-right-line text-gray-700"></i></Link>
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>

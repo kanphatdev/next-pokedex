@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, Button } from '@mui/material';
 import Link from 'next/link';
+import Navbar from './Nav';
 interface Pokemon {
   name: string;
   sprites: {
@@ -24,11 +25,10 @@ export default function Pokedex({ pokemonList }: PokedexProps) {
   };
 
   return (
+    
     <div className="p-4">
-   
-      <Link className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full no-underline"  href='SearchPage'>
-        Button
-      </Link>
+   <Navbar/>
+     
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 my-3">
         {pokemonList.map((pokemon) => (
           <Card key={pokemon.name} className="max-w-md " onClick={() => handlePokemonClick(pokemon)}>

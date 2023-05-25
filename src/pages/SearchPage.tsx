@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Container, TextField, Grid, Card, CardContent, Typography, CardMedia, Button } from '@mui/material';
-
+import Link from 'next/link';
 export default function SearchPage({ pokemons }) {
     const [searchTerm, setSearchTerm] = useState('');
     const filteredPokemons = pokemons.filter(pokemon =>
@@ -23,6 +23,7 @@ export default function SearchPage({ pokemons }) {
             />
 
             <Grid container spacing={2}>
+           
                 {filteredPokemons.map(pokemon => (
                     <Grid item key={pokemon.name} xs={12} sm={6} md={4} lg={3}>
                         <Card className="bg-white">
@@ -37,16 +38,18 @@ export default function SearchPage({ pokemons }) {
                                     {pokemon.name}
                                 </Typography>
                                 <Typography color="text.secondary">
-                                    ID: {pokemon.id}
+                                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{pokemon.id}</span>
                                 </Typography>
                                 <Button size="small" className='text-black' href={pokemon.name}>
                                     detail
                                 </Button>
                             </CardContent>
                         </Card>
+            
                     </Grid>
                 ))}
             </Grid>
+           
         </Container>
     );
 }
